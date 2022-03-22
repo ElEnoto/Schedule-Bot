@@ -1,0 +1,37 @@
+version: '3.5'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/var/www/app
+      - ./nginx_conf/docker.conf:/etc/nginx/conf.d/docker.conf
+    links:
+      - php-fpm
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./www:/var/www/app
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+      - ./create.sql:/docker-entrypoint-initdb.d/create.sql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: otus
+      POSTGRES_DB: otus
+volumes:
+  postgresql:
+#
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - 5432:5432
