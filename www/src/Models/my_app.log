@@ -117,3 +117,6 @@
 [2022-03-21T18:56:03.277051+00:00] name.ERROR: Event wasn't deleted because of fields "delete_event" was empty [] []
 [2022-03-21T18:56:06.155058+00:00] name.ERROR: Event wasn't added because of fields are empty [] []
 [2022-03-22T17:43:04.239455+00:00] name.NOTICE: Authenticate user [] []
+[2022-03-22T21:27:22.870543+00:00] name.ERROR: Event wasn't deleted because of fields "delete_event" was empty [] []
+[2022-03-22T21:30:02.830378+00:00] name.ERROR: Event wasn't deleted because of fields "delete_event" was empty [] []
+[2022-03-22T21:59:24.197426+00:00] name.NOTICE: Authenticate user [] []

@@ -2,6 +2,7 @@
 namespace Otus\Controllers;
 
 use Otus\Models\Event\FindAddContent;
+use Otus\Models\Event\FindChangeContent;
 use Otus\Models\Event\FindDeleteContent;
 use Otus\Models\Event\Get;
 use Otus\View;
@@ -9,15 +10,20 @@ use Otus\View;
 class AdminController {
     public static $add_content;
     public static $delete_Id;
+    public static $change_Id;
     public static function start():void
     {
         self::$add_content = FindAddContent::find_content();
         self::$delete_Id = FindDeleteContent::findDeleteID();
+        self::$change_Id = FindChangeContent::findChangeID();
         if (self::$add_content){
             EventAddController::add_event();
         }elseif (self::$delete_Id){
             EventDeleteController::delete_event();
-        }else{
+        }elseif (self::$change_Id){
+            EventChangeController::change_event();
+        }
+        else{
             self::show_events();
         }
 

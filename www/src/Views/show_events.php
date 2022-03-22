@@ -1,5 +1,6 @@
 <?php
 use Otus\View;
+use Otus\Models\Event\FindChangeContent;
 ?>
 <!doctype html>
 <html lang="en">
@@ -45,15 +46,19 @@ use Otus\View;
     </div>
     <div class="form-group">
         <label for="time">Время</label>
-        <input type="time" class="form-control" id="time" name="time">
+        <input type="time" class="form-control" id="time" name="time"  <?php if (FindChangeContent::$change_content) {
+            ?> value="<?php echo FindChangeContent::$time ?>"  <?php
+        } ?> >
     </div>
     <div class="form-group">
         <label for="cost">Стоимость</label>
-        <input type="text" class="form-control" id="cost" name="cost" placeholder="в рублях">
+        <input type="text" class="form-control" id="cost" name="cost" placeholder="в рублях" <?php if (FindChangeContent::$change_content) {
+            ?> value="<?php echo FindChangeContent::$cost ?>"  <?php
+        } ?>>
     </div>
     <div class="form-group">
         <label for="comment">Дополнительная информация</label>
-        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+        <textarea class="form-control" id="comment" name="comment" rows="3" placeholder="Удачной игры!"></textarea>
     </div>
     <input type="submit" class="btn btn-primary" value="Отправить расписание">
 </form>

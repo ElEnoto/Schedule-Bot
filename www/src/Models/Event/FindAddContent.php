@@ -12,7 +12,7 @@ class FindAddContent
     public static string $date;
     public static string $time;
     public static int $cost;
-    public static string $comment = 'Удачной игры';
+    public static string $comment = 'Удачной игры!';
     public static function find_content():array|string
     {
         if (empty($_POST['date']) and empty($_POST['time']) and empty($_POST['cost']) and empty($_POST['comment']) and empty($_POST['club_name']) and empty($_POST['format_name'])){

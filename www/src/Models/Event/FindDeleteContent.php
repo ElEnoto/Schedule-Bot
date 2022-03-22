@@ -14,15 +14,16 @@ class FindDeleteContent
     public static string $date;
     public static string $time;
     public static string $error = '';
-    public static function findDeleteID(): array|string
+    public static function findDeleteID()
     {
         if (empty ($_POST['id_event']) and empty ($_POST['delete'])){
             return self::$deleteId;
         }
-        if (!empty ($_POST['id_event'])) {
+        if (!empty ($_POST['id_event']) and !empty ($_POST['delete'])) {
             self::$deleteId = $_POST['id_event'];
             return self::$deleteId;
-        } else {
+        }
+        if (empty ($_POST['id_event']) and !empty ($_POST['delete'])) {
             self::$error = 'Событие не удалено. Убедитесь, что отметили событие, которое хотите удалить';
             Log::error('Event wasn\'t deleted because of fields "delete_event" was empty');
             return self::$error;
