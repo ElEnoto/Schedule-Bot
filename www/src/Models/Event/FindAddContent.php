@@ -13,12 +13,15 @@ class FindAddContent
     public static string $time;
     public static int $cost;
     public static string $comment = 'Удачной игры!';
-    public static function find_content():array|string
+    public static function findAddContent():bool|array|string
     {
-        if (empty($_POST['date']) and empty($_POST['time']) and empty($_POST['cost']) and empty($_POST['comment']) and empty($_POST['club_name']) and empty($_POST['format_name'])){
+        if (!empty($_POST['add_change']) or !empty($_POST['change']) or !empty($_POST['delete'])){
+            return false;
+        }
+        if (empty($_POST['date']) and empty($_POST['time']) and empty($_POST['cost']) and empty($_POST['comment']) and empty($_POST['club_name']) and empty($_POST['format_name']) and !empty($_POST['add'])){
             return self::$add_content;
         }
-        if (!empty($_POST['date']) and !empty($_POST['time']) and !empty($_POST['cost'])) {
+        if (!empty($_POST['date']) and !empty($_POST['time']) and !empty($_POST['cost']) and !empty($_POST['add'])) {
             if (!preg_match('/^\d+$/', $_POST['cost'])){
                 self::$error = 'Поле "Стоимость" должно содержать только цифры';
                 Log::error('Event wasn\'t added because of fields "cost" must include just numeric');

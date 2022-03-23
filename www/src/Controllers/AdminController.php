@@ -9,11 +9,13 @@ use Otus\View;
 
 class AdminController {
     public static $add_content;
+    public static $change_content;
     public static $delete_Id;
     public static $change_Id;
     public static function start():void
     {
-        self::$add_content = FindAddContent::find_content();
+        self::$add_content = FindAddContent::findAddContent();
+        self::$change_content = FindChangeContent::change_content();
         self::$delete_Id = FindDeleteContent::findDeleteID();
         self::$change_Id = FindChangeContent::findChangeID();
         if (self::$add_content){
@@ -22,45 +24,13 @@ class AdminController {
             EventDeleteController::delete_event();
         }elseif (self::$change_Id){
             EventChangeController::change_event();
+        }elseif (self::$change_content){
+            EventChangeController::add_change_event();
         }
         else{
             self::show_events();
         }
 
-
-
-//        $add_content = FindAddContent::find_content();
-//        $delete_Id = FindDeleteContent::findDeleteID();
-//        if ($add_content and !FindAddContent::$error) {
-//            Check::CheckAddContent(FindAddContent::$date, FindAddContent::$time);
-//            if (Check::$error) {
-//                View::$error = Check::$error;
-//                self::show_events();
-//            } else {
-//                BotAddController::sendSchedule();
-//                BotAddController::sendPoll();
-//                Add::add_event($add_content);
-//                self::show_events();
-//            }
-//        } elseif (FindAddContent::$error) {
-//            View::$error = FindAddContent::$error;
-//            self::show_events();
-//        }
-//        elseif ($delete_Id and !FindDeleteContent::$error){
-//            $delete_content = FindDeleteContent::findDeleteContent($delete_Id);
-//            foreach ($delete_content as $delete){
-//                FindDeleteContent::ContentForBot($delete);
-//                BotDeleteController::sendDelete();
-//            }
-//            Delete::delete($delete_Id);
-//            self::show_events();
-//        } elseif (FindDeleteContent::$error){
-//            View::$error = FindDeleteContent::$error;
-//            self::show_events();
-//        }
-//        else {
-//            self::show_events();
-//        }
     }
     public static function show_events():void
     {
