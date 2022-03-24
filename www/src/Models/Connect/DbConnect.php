@@ -1,11 +1,12 @@
 <?php
 namespace Otus\Models\Connect;
 
+use Otus\Log;
 use PDO;
 
 class DbConnect
 {
-    public static function db_connect()
+    public static function dbConnect()
     {
         try {
             return new PDO('pgsql:host=postgresql;dbname=otus','postgres','otus',[
@@ -14,6 +15,7 @@ class DbConnect
             ]);
         } catch (\Throwable $exception){
             echo 'Something was wrong. We will fix it soon';
+            Log::warning('couldn\'t connect to Db');
         }
     }
 }
