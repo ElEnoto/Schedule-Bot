@@ -26,7 +26,7 @@ class BotDeleteController
             curl_setopt($ch, CURLOPT_HEADER, 0);
             curl_exec($ch);
             curl_close($ch);
-            Log::warning('Bot sent massage about removal!!!', ['date' => FindDeleteContent::$date, 'time' => FindDeleteContent::$time]);
+            Log::notice('Bot sent massage about removal!!!', ['date' => FindDeleteContent::$date, 'time' => FindDeleteContent::$time]);
         } catch (\Throwable $exception) {
             echo 'Something was wrong. We will fix it soon';
             Log::warning('Bot did not send massage about removal!!!', ['date' => FindDeleteContent::$date, 'time' => FindDeleteContent::$time]);
