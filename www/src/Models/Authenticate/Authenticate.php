@@ -7,7 +7,8 @@ use Otus\Models\Connect\DbConnect;
 
 class Authenticate
 {
-    public static function authenticate($username, $password): ?int
+    public static string $error = '';
+    public static function dbAuthenticate(string $username, string|int $password): ?int
     {
         try {
             $pdo = DbConnect::dbConnect();
@@ -21,5 +22,29 @@ class Authenticate
             Log::warning('couldn\'t authenticate');
         }
         return $result->fetchAll()[0]['id'];
+    }
+
+    public static function userAuthenticate()
+    {
+        try {
+            if (!empty($_GET['action']) && $_GET['action'] == 'auth' && empty($_SESSION['user_id'])) {
+                $result = Authenticate::dbAuthenticate($_POST['username'], $_POST['password']);
+                if (!$result) {
+                    self::$error = "Невреное имя пользователя или пароль!";
+                } else {
+                    $_SESSION['user_id'] = $result;
+                    $_SESSION['name'] = $_POST['username'];
+                    Log::notice('Hello', ['user_id' => $result]);
+                }
+            }
+            if (empty($_SESSION['user_id'])) {
+                return false;
+            } else {
+                return $_SESSION['user_id'];
+            }
+        } catch (\Throwable $exception) {
+            echo 'Something was wrong. We will fix it soon';
+            Log::warning('We have a problem with Authenticate!!!');
+        }
     }
 }

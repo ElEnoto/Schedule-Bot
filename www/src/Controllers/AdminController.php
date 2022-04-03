@@ -16,11 +16,11 @@ class AdminController
     public static $delete_Id;
     public static $change_Id;
 
-    public static function start(): void
+    public function start(): void
     {
         try {
-            self::$add_content = FindAddContent::findAddContent();
-            self::$change_content = FindChangeContent::FindChangeContent();
+            self::$add_content = FindAddContent::findContent();
+            self::$change_content = FindChangeContent::findContent();
             self::$delete_Id = FindDeleteContent::findDeleteID();
             self::$change_Id = FindChangeContent::findChangeID();
             if (self::$add_content) {

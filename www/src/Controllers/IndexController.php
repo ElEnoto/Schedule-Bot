@@ -12,19 +12,13 @@ class IndexController
     {
         try {
             session_start();
-            if (!empty($_GET['action']) && $_GET['action'] == 'auth' && empty($_SESSION['user_id'])) {
-                $result = Authenticate::authenticate($_POST['username'], $_POST['password']);
-                if (!$result) {
-                    Log::error('Wrong username or password');
-                    View::$error = "Невреное имя пользователя или пароль!";
-                    View::authenticate();
-                } else {
-                    $_SESSION['user_id'] = $result;
-                    $_SESSION['name'] = $_POST['username'];
-                    Log::notice('Hello', ['user_id' => $result]);
-                }
+            Authenticate::userAuthenticate();
+            if (Authenticate::$error) {
+                Log::error('Wrong username or password');
+                View::$error = Authenticate::userAuthenticate();
+                View::authenticate();
             }
-            if (empty($_SESSION['user_id'])) {
+            if (!Authenticate::userAuthenticate()) {
                 View::authenticate();
             } else {
                 $controller = new AdminController();

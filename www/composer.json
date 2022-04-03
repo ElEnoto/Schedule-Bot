@@ -8,12 +8,8 @@
     },
     "require": {
         "illuminate/database": "^8.69",
-        "doctrine/orm": "^2.10",
-        "symfony/yaml": "^5.3",
-        "symfony/cache": "^5.3",
         "twbs/bootstrap": "4.6.1",
         "monolog/monolog": "^2.3",
         "ext-curl": "*"
     }
-
 }

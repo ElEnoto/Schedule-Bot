@@ -5,15 +5,8 @@ namespace Otus\Models\Event;
 use Otus\Log;
 use Otus\Models\Connect\DbConnect;
 
-class FindChangeContent
+class FindChangeContent extends FindContent
 {
-    public static string $club_name;
-    public static string $format_name;
-    public static string $date;
-    public static string $time;
-    public static string $cost;
-    public static string $comment = 'Удачной игры!';
-    public static string $error = '';
     public static $change_id;
     public static array $change_content = [];
     public static array $change_content_view = [];
@@ -70,7 +63,7 @@ class FindChangeContent
         }
     }
 
-    public static function findChangeContent()
+    public static function findContent()
     {
         if (empty($_POST['add_change']) and empty($_POST['change']) and empty($_POST['delete']) and empty($_POST['add'])) {
             return false;

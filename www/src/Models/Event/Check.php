@@ -9,7 +9,7 @@ class Check
 {
     public static string $error = '';
 
-    public static function checkAddContent(string $date, string $time)
+    public static function checkAddContent(string $date, string $time):?string
     {
         $pdo = DbConnect::dbConnect();
         $result = $pdo->prepare('select id_event from events where date = ? and time = ?');
@@ -21,7 +21,7 @@ class Check
         return self::$error;
     }
 
-    public static function checkChangeContent($change_id, string $date, string $time)
+    public static function checkChangeContent($change_id, string $date, string $time):?string
     {
         $pdo = DbConnect::dbConnect();
         $result = $pdo->prepare('select id_event from events where date = ? and time = ?');
